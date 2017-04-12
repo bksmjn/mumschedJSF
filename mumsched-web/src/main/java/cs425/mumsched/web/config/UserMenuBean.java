@@ -74,8 +74,8 @@ public class UserMenuBean implements Serializable {
     }
 
     private void addTopLevelMenuForADMIN() {
-        String[] menu_codes = {"User", "Preferences", "CourseManagement", "BlockManagement ", "EntryManagement","ScheduleManagement"};
-        String[] menu_levels = {"User Management", "Preferences", "Course Management", "Block Management", "Entry Management","Schedule Management"};
+        String[] menu_codes = {"User", "Preferences", "CourseManagement", "BlockManagement ", "EntryManagement", "ScheduleManagement","SectionManagement"};
+        String[] menu_levels = {"User Management", "Preferences", "Course Management", "Block Management", "Entry Management", "Schedule Management","Section Management"};
         int index = 0;
         for (String s : menu_codes) {
             this.menus.add(new ApplicationMenu(s, menu_levels[index], null));
@@ -102,6 +102,7 @@ public class UserMenuBean implements Serializable {
         this.addBlockStructure(menu_codes[3]);
         this.addEntryStructure(menu_codes[4]);
         this.addScheduleStructure(menu_codes[5]);
+        this.addSections(menu_codes[6]);
     }
 
     private void addSubMenuForStudent(String[] menu_codes) {
@@ -197,6 +198,11 @@ public class UserMenuBean implements Serializable {
 
     private void addPreference(String parentCode) {
         this.menus.add(new ApplicationMenu("change_password", "Change Password", parentCode, "/faces/preferences/changepassword.xhtml", " ", ApplicationMenu.MenuType.Entries));
+
+    }
+
+    private void addSections(String parentCode) {
+        this.menus.add(new ApplicationMenu("list_sections", "List Sections", parentCode, "/faces/sections/listsection.xhtml", " ", ApplicationMenu.MenuType.Queries));
 
     }
 

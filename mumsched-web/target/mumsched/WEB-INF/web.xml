@@ -33,9 +33,9 @@
     
 <!--    <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>bootstrap</param-value>
-    </context-param>-->
-<!--    <context-param>
+        <param-value>start</param-value>
+    </context-param>
+    <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>
         <param-value>true</param-value>
     </context-param>-->
@@ -76,6 +76,6 @@
     
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>home.xhtml</welcome-file>
+        <welcome-file>faces/home.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
