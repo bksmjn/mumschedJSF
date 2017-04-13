@@ -1,6 +1,7 @@
 package cs425.mumsched.web.utils;
 
 import cs425.mumsched.web.StartUpBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -10,12 +11,15 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class TemplateController {
+    
+    @Autowired
+    StartUpBean startUpBean;
 
     public TemplateController() {
     }
 
     public String getUserName() {
-        return StartUpBean.getUserName();
+        return startUpBean.getUserName();
     }
 
 }

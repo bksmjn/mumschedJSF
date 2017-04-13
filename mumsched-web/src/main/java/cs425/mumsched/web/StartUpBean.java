@@ -3,19 +3,23 @@ package cs425.mumsched.web;
 import cs425.mumsched.web.usermgmt.control.UserManager;
 import cs425.mumsched.web.usermgmt.entity.Role;
 import cs425.mumsched.web.usermgmt.entity.User;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author bikesh
  */
-public class StartUpBean {
+
+@SessionScoped
+public class StartUpBean implements Serializable{
 
     @Autowired
     private UserManager usermanager;
-    private static String userName;
-    private static String role;
+    private String userName;
+    private String role;
 
     public StartUpBean() {
 
@@ -45,28 +49,32 @@ public class StartUpBean {
         usermanager.addUser(u2);
     }
 
-    public UserManager getUsermanager() {
-        return usermanager;
-    }
-
-    public void setUsermanager(UserManager usermanager) {
-        this.usermanager = usermanager;
-    }
-
-    public static String getUserName() {
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
         return userName;
     }
 
-    public static void setUserName(String userName) {
-        StartUpBean.userName = userName;
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public static String getRole() {
+    /**
+     * @return the role
+     */
+    public String getRole() {
         return role;
     }
 
-    public static void setRole(String role) {
-        StartUpBean.role = role;
+    /**
+     * @param role the role to set
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

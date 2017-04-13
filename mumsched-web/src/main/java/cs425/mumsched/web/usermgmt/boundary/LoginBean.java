@@ -1,6 +1,9 @@
 package cs425.mumsched.web.usermgmt.boundary;
 
+import cs425.mumsched.web.StartUpBean;
+import cs425.mumsched.web.usermgmt.control.UserFinder;
 import cs425.mumsched.web.usermgmt.control.UserManager;
+import cs425.mumsched.web.usermgmt.entity.User;
 import cs425.mumsched.web.utils.HttpUtils;
 import cs425.mumsched.web.utils.Identity;
 import cs425.mumsched.web.utils.Messages;
@@ -23,6 +26,15 @@ public class LoginBean implements Serializable {
     UserManager um;
 
     @Autowired
+    UserFinder userFinder;
+
+    @Autowired
+    StartUpBean startUpBean;
+
+    @Autowired
+    private Messages messages;
+
+    @Autowired
     Messages message;
 
     public LoginBean() {
@@ -30,10 +42,32 @@ public class LoginBean implements Serializable {
     }
 
     public String doLogin() {
-        System.out.println("doLogin Method called");
-        return "/faces/home.xhtml?faces-redirect=true";
-    }
+        try {
+            System.out.println("doLogin Method called");
+            User u = this.userFinder.findUserByEmailAddress(userName);
+            if (u.getPassword().equals(password)) {
+                startUpBean.setUserName(u.getEmailAddress());
+                startUpBean.setRole(u.getRole());
+                  return "/faces/home.xhtml?faces-redirect=true";
+            }else{
+                this.messages.addError(null, "Login", "Invalid Credentials");
+            }
 
+        } catch (Exception ex) {
+            messages.addError(null, "User", "Invalid Username/Password");
+        }
+      return null;
+
+    }
+    
+    public String doLogout(){
+        try{
+            
+        }catch(Exception ex){
+            
+        }
+        return null;
+    }
     public String getUserName() {
         return userName;
     }

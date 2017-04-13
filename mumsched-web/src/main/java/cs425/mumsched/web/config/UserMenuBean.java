@@ -28,13 +28,15 @@ public class UserMenuBean implements Serializable {
     private List<ApplicationMenu> menus;
     @Autowired
     private UserFinder userFinder;
+    @Autowired
+    private StartUpBean startUpBean;
 
     @PostConstruct
     private void init() {
         this.menuModel = new DefaultMenuModel();
         this.menus = new ArrayList<>();
-        User u = this.userFinder.findUserByEmailAddress(StartUpBean.getUserName());
-        System.out.println("ROLE:" + StartUpBean.getRole());
+        String userName=startUpBean.getUserName();
+        User u = this.userFinder.findUserByEmailAddress(userName);
         if (u.getRole().equals("ROLE_ADMIN")) {
             this.addTopLevelMenuForADMIN();
 

@@ -17,11 +17,11 @@
     <h:body>
         <div class="wraper" align="center">
             <div class="loginForm">
-                <h1 class="widget-title">EClassRoom</h1>
-                <p:messages globalOnly="true" showDetail="true" showSummary="false" redisplay="true" id="msg_global" />
+                <h1 class="widget-title">MUMSched</h1>
                 <h:form id="login" prependId="false" >
+                     <p:messages globalOnly="true" showDetail="true" showSummary="false" redisplay="true" id="msg_global" />
                     <table>
-                        <tr><td>User Name:</td>
+                        <tr><td>Email Address:</td>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             <td>  <h:inputText  id="username" required="true" value="#{loginBean.userName}">
                                 </h:inputText>

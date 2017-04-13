@@ -23,16 +23,4 @@
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
-    
-  
-    
-<!--    <bean id="courseBean" class="cs544.myblog.web.usermgmt.boundary.CourseBean" scope="prototype">
-        <property name="courseManager" ref="courseManager" />
-    </bean>
-    
-     <bean id="courseManager" class="cs544.myblog.web.usermgmt.control.CourseManager">
-         <property name="sessionFactory" ref="sessionFactory" />
-     </bean>
-    -->
-   
 </beans>

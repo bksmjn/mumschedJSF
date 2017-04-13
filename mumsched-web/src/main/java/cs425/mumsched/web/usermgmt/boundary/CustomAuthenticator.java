@@ -35,6 +35,8 @@ public class CustomAuthenticator implements AuthenticationProvider {
     UserManager userManager;
     @Autowired
     Messages messages;
+    @Autowired
+    StartUpBean startUpBean;
     
     public CustomAuthenticator() {
         System.out.println("Inside CustomAuthenticator");
@@ -42,8 +44,7 @@ public class CustomAuthenticator implements AuthenticationProvider {
     
     @Override
     public Authentication authenticate(Authentication a) throws AuthenticationException {
-        StartUpBean.setUserName(a.getName());
-        System.out.println("Inside Authentication=" + StartUpBean.getUserName());
+        startUpBean.setUserName(a.getName());
         String email = a.getName();
         String password = a.getCredentials().toString();
         User user = userFinder.findUserByEmailAddress(email);
@@ -53,7 +54,7 @@ public class CustomAuthenticator implements AuthenticationProvider {
         }
         if (email.equals(user.getEmailAddress()) && password.equals(user.getPassword())) {
             User u = this.userFinder.findUserByEmailAddress(email);
-            StartUpBean.setRole(u.getRole());
+            startUpBean.setRole(u.getRole());
             List<GrantedAuthority> grantedAuth = new ArrayList<GrantedAuthority>();
             grantedAuth.add(new SimpleGrantedAuthority(u.getRole()));
             Authentication auth = new UsernamePasswordAuthenticationToken(email, password, grantedAuth);
