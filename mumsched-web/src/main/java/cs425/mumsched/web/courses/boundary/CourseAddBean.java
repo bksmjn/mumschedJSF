@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cs425.mumsched.web.usermgmt.boundary;
+package cs425.mumsched.web.courses.boundary;
 
-import cs425.mumsched.web.usermgmt.control.CourseManager;
-import cs425.mumsched.web.usermgmt.entity.Course;
+import cs425.mumsched.web.courses.control.CourseManager;
+import cs425.mumsched.web.courses.entity.Course;
 import cs425.mumsched.web.utils.Messages;
 import java.io.Serializable;
 import javax.faces.bean.ViewScoped;

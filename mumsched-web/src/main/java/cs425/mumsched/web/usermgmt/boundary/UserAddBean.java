@@ -1,10 +1,7 @@
 package cs425.mumsched.web.usermgmt.boundary;
 
-import cs425.mumsched.web.email.boundary.ClientBean;
 import cs425.mumsched.web.email.control.MailService;
-import cs425.mumsched.web.usermgmt.control.CourseFinder;
 import cs425.mumsched.web.usermgmt.control.UserManager;
-import cs425.mumsched.web.usermgmt.entity.Course;
 import cs425.mumsched.web.usermgmt.entity.Role;
 import cs425.mumsched.web.usermgmt.entity.User;
 import cs425.mumsched.web.utils.Messages;

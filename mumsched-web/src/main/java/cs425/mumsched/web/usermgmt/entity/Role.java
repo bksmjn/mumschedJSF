@@ -3,7 +3,7 @@ package cs425.mumsched.web.usermgmt.entity;
 
 /**
  *
- * @author FaRiii
+ * @author bikesh
  */
 public enum Role {
     

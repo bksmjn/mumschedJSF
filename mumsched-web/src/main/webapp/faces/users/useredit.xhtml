@@ -12,7 +12,7 @@
                     <f:facet name="header">
                         <label>User Management &raquo; Queries &raquo; Course List</label>
                     </f:facet> 
-                    <p:dataTable var="c" value="#{userEditBean.user.courses}" id="userTable">
+                    <p:dataTable var="c" value="#{userEditBean.user.c}" id="userTable">
                         <p:column headerText="Code">
                             <h:outputText value="#{c.courseCode}" />
                         </p:column>

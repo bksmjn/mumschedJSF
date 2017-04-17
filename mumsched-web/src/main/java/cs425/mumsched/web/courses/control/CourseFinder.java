@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cs425.mumsched.web.usermgmt.control;
+package cs425.mumsched.web.courses.control;
 
-import cs425.mumsched.web.usermgmt.entity.Course;
+import cs425.mumsched.web.courses.entity.Course;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,9 @@ public class CourseFinder {
     @Transactional(propagation = Propagation.SUPPORTS)
     public Course findByCourseCode(String courseCode) {
         try {
-            return (Course) sessionFactory.getCurrentSession().getNamedQuery(Course.FIND_BY_COURSE_CODE).setParameter("code", courseCode).uniqueResult();
+            Course course=(Course) sessionFactory.getCurrentSession().getNamedQuery(Course.FIND_BY_COURSE_CODE).setParameter("code", courseCode).uniqueResult();
+            System.out.println("Course"+course.getCourseCode());
+            return course;
         } catch (IllegalArgumentException ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }

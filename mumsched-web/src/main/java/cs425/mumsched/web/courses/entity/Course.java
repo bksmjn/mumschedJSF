@@ -1,4 +1,4 @@
-package cs425.mumsched.web.usermgmt.entity;
+package cs425.mumsched.web.courses.entity;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author FaRiii
+ * @author Bikesh
  */
 @Entity
 @Table(name = "courses")

@@ -1,7 +1,7 @@
-package cs425.mumsched.web.usermgmt.boundary;
+package cs425.mumsched.web.courses.boundary;
 
-import cs425.mumsched.web.usermgmt.control.CourseFinder;
-import cs425.mumsched.web.usermgmt.entity.Course;
+import cs425.mumsched.web.courses.control.CourseFinder;
+import cs425.mumsched.web.courses.entity.Course;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;

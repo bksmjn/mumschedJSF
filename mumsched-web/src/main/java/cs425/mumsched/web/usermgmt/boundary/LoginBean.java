@@ -4,11 +4,8 @@ import cs425.mumsched.web.StartUpBean;
 import cs425.mumsched.web.usermgmt.control.UserFinder;
 import cs425.mumsched.web.usermgmt.control.UserManager;
 import cs425.mumsched.web.usermgmt.entity.User;
-import cs425.mumsched.web.utils.HttpUtils;
-import cs425.mumsched.web.utils.Identity;
 import cs425.mumsched.web.utils.Messages;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 

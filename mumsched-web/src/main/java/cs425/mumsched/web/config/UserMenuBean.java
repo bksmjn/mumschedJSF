@@ -35,7 +35,7 @@ public class UserMenuBean implements Serializable {
     private void init() {
         this.menuModel = new DefaultMenuModel();
         this.menus = new ArrayList<>();
-        String userName=startUpBean.getUserName();
+        String userName = startUpBean.getUserName();
         User u = this.userFinder.findUserByEmailAddress(userName);
         if (u.getRole().equals("ROLE_ADMIN")) {
             this.addTopLevelMenuForADMIN();
@@ -76,8 +76,8 @@ public class UserMenuBean implements Serializable {
     }
 
     private void addTopLevelMenuForADMIN() {
-        String[] menu_codes = {"User", "Preferences", "CourseManagement", "BlockManagement ", "EntryManagement", "ScheduleManagement","SectionManagement"};
-        String[] menu_levels = {"User Management", "Preferences", "Course Management", "Block Management", "Entry Management", "Schedule Management","Section Management"};
+        String[] menu_codes = {"User", "Preferences", "CourseManagement", "BlockManagement ", "EntryManagement", "ScheduleManagement", "SectionManagement"};
+        String[] menu_levels = {"User Management", "Preferences", "Course Management", "Block Management", "Entry Management", "Schedule Management", "Section Management"};
         int index = 0;
         for (String s : menu_codes) {
             this.menus.add(new ApplicationMenu(s, menu_levels[index], null));
@@ -114,8 +114,8 @@ public class UserMenuBean implements Serializable {
     }
 
     private void addTopLevelMenuForProfessor() {
-        String[] menu_codes = {"Choose Block", "Preferences"};
-        String[] menu_levels = {"Choose Block", "Preferences"};
+        String[] menu_codes = {"Choose Course","Choose Block", "Preferences"};
+        String[] menu_levels = {"Choose Course","Choose Block", "Preferences"};
         int index = 0;
         for (String s : menu_codes) {
             this.menus.add(new ApplicationMenu(s, menu_levels[index], null));
@@ -125,8 +125,9 @@ public class UserMenuBean implements Serializable {
     }
 
     private void addSubMenuForProfessor(String[] menu_codes) {
-        this.addChooseBlockForProfessor(menu_codes[0]);
-        this.addPreference(menu_codes[1]);
+        this.chooseCourse(menu_codes[0]);
+        this.addChooseBlockForProfessor(menu_codes[1]);
+        this.addPreference(menu_codes[2]);
     }
 
     private void addTopLevelMenu() {
@@ -188,6 +189,13 @@ public class UserMenuBean implements Serializable {
 
         this.menus.add(new ApplicationMenu("student_profile", "Add Profile", parentCode, "/faces/profiles/studentprofile.xhtml", " ", ApplicationMenu.MenuType.Entries));
         this.menus.add(new ApplicationMenu("view_profile", "Show Profile", parentCode, "/faces/profiles/listprofile.xhtml", " ", ApplicationMenu.MenuType.Queries));
+
+    }
+
+    private void chooseCourse(String parentCode) {
+
+        this.menus.add(new ApplicationMenu("choose_course", "Choose Courses", parentCode, "/faces/courses/choosecourse.xhtml", " ", ApplicationMenu.MenuType.Entries));
+        this.menus.add(new ApplicationMenu("view_chosencourse", "Show Courses", parentCode, "/faces/courses/listchosencourse.xhtml", " ", ApplicationMenu.MenuType.Queries));
 
     }
 

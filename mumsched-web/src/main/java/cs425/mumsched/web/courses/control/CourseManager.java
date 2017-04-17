@@ -1,6 +1,6 @@
-package cs425.mumsched.web.chapters.control;
+package cs425.mumsched.web.courses.control;
 
-import cs425.mumsched.web.chapters.entity.Chapter;
+import cs425.mumsched.web.courses.entity.Course;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,25 +13,28 @@ import org.springframework.transaction.annotation.Transactional;
  * @author bikesh
  */
 @Repository
-public class ChapterManager {
+public class CourseManager {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    public ChapterManager() {
-
+    public CourseManager() {
+        System.out.println("CourseManager");
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    @PreAuthorize("hasRole('ROLE_PROFESSOR')")
-    public void add(Chapter chapter) {
-        sessionFactory.getCurrentSession().persist(chapter);
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void addCourse(Course course) {
+        try {
+            sessionFactory.getCurrentSession().saveOrUpdate(course);
+            this.sessionFactory.getCurrentSession().flush();
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+
     }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
