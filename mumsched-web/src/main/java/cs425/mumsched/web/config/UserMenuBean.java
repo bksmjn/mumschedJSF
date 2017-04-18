@@ -173,8 +173,8 @@ public class UserMenuBean implements Serializable {
 
     private void addEntryStructure(String parentCode) {
 
-        this.menus.add(new ApplicationMenu("entry_manage", "Add Entry", parentCode, "/faces/blocks/entryadd.xhtml", " ", ApplicationMenu.MenuType.Entries));
-        this.menus.add(new ApplicationMenu("entry_list", "List Entry", parentCode, "/faces/blocks/entrylist.xhtml", " ", ApplicationMenu.MenuType.Queries));
+        this.menus.add(new ApplicationMenu("entry_manage", "Add Entry", parentCode, "/faces/entries/addentry.xhtml", " ", ApplicationMenu.MenuType.Entries));
+        this.menus.add(new ApplicationMenu("entry_list", "List Entry", parentCode, "/faces/entries/listentry.xhtml", " ", ApplicationMenu.MenuType.Queries));
 
     }
 

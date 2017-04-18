@@ -17,8 +17,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "courses")
 @NamedQueries({
-    @NamedQuery(name = Course.FIND_ALL, query = "SELECT c FROM Course c"),
-    @NamedQuery(name = Course.FIND_BY_COURSE_CODE, query = "SELECT c FROM Course c where c.courseCode=:code")
+    @NamedQuery(name = Course.FIND_ALL, query = "SELECT c FROM Course c where c.isActive=true"),
+    @NamedQuery(name = Course.FIND_BY_COURSE_CODE, query = "SELECT c FROM Course c where c.courseCode=:code and c.isActive=true")
 })
 public class Course implements Serializable {
 
@@ -34,9 +34,14 @@ public class Course implements Serializable {
     @NotNull
     @Column(name = "course_description")
     private String courseDescription;
+    
     @NotNull
     @Column(name = "course_level")
     private String courseLevel;
+    
+    @Column(name = "is_active")
+    private boolean isActive;
+    
     private static final String DOMAIN_PREFIX = "cs544.myblog.web.usermgmt.entity.Course";
     public static final String FIND_ALL = DOMAIN_PREFIX + "FIND_ALL";
     public static final String FIND_BY_COURSE_CODE = DOMAIN_PREFIX + "FIND_BY_COURSE_CODE";
@@ -83,6 +88,15 @@ public class Course implements Serializable {
     public void setCourseLevel(String courseLevel) {
         this.courseLevel = courseLevel;
     }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
 
     @Override
     public String toString() {

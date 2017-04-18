@@ -16,6 +16,31 @@
                     <f:facet name="header">
                         <label>Entry Management &raquo; List &raquo; List Entry</label>
                     </f:facet>
+                    <p:dataTable var="entries" value="#{entryListBean.entries}" id="entryTable">
+                        <p:column headerText="Entry Code">
+                            <h:outputText value="#{entries.entryCode}" />
+                        </p:column>
+                        <p:column headerText="Entry Name">
+                            <h:outputText value="#{entries.entryName}" />
+                        </p:column>
+
+                        <p:column headerText="No of Fpp Students">
+                            <h:outputText value="#{entries.noOfFPP}" />
+                        </p:column>
+
+                        <p:column headerText="No of MPP Students">
+                            <h:outputText value="#{entries.noOfMPP}" />
+                        </p:column>
+                        <p:column headerText="No of US Residents">
+                            <h:outputText value="#{entries.noOfUSRes}" />
+                        </p:column>
+                        <p:column headerText="">
+                            <h:outputLink id="editLink"  value="#{request.contextPath}/faces/entries/editentry.xhtml">
+                                <f:param name="entryCode" value="#{entries.entryCode}"/>
+                                Edit
+                            </h:outputLink>
+                        </p:column>
+                    </p:dataTable>
                 </p:panel>
             </h:form>
         </ui:define>

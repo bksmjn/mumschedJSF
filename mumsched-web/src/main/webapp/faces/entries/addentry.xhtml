@@ -16,7 +16,31 @@
                     <f:facet name="header">
                         <label>Entry Management &raquo; Entries &raquo; Add Entry</label>
                     </f:facet>
+                    <h:panelGrid columns="3"  style="font-size: small">
+                        <h:outputLabel id="lblEntryCode" value="Entry Code" for="entryCode"/>
+                        <h:inputText id="entryCode" value="#{entryAddBean.entry.entryCode}"/>
+                        <h:message id="inentryCode" for="entryCode"/>
+
+                        <h:outputLabel id="lblEntryName" value="Entry Name" for="entryName"/>
+                        <h:inputText id="entryName" value="#{entryAddBean.entry.entryName}"/>
+                        <h:message id="inentryName" for="entryName"/>
+
+                        <h:outputLabel id="lblNoOFFPP" value="No. of FPP Students" for="NoOFFPP"/>
+                        <h:inputText id="NoOFFPP" value="#{entryAddBean.entry.noOfFPP}"/>
+                        <h:message id="inNoOFFPP" for="NoOFFPP"/>
+
+                        <h:outputLabel id="lblNoOMPP" value="No. of MPP Students" for="NoOFMPP"/>
+                        <h:inputText id="NoOFMPP" value="#{entryAddBean.entry.noOfMPP}"/>
+                        <h:message id="inNoOFMPP" for="NoOFMPP"/>
+
+                        <h:outputLabel id="lblNoUSResidents" value="No. of US Residents" for="noOfUSResidents"/>
+                        <h:inputText id="noOfUSResidents" value="#{entryAddBean.entry.noOfUSRes}"/>
+                        <h:message id="innoOfUSResidents" for="noOfUSResidents"/>
+                    </h:panelGrid>
                 </p:panel>
+                <h:commandButton id="saveBtn" style="display: none;" value="Save">
+                    <f:ajax listener="#{entryAddBean.saveButtonClickedHandler}" execute="@form" render=":entryAdd :msg_global"/>
+                </h:commandButton>
             </h:form>
         </ui:define>
     </ui:composition>
