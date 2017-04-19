@@ -12,10 +12,44 @@
         </ui:define>
         <ui:define name="content">
             <h:form id="blockList" prependId="false">
-                <p:panel style="border: none;" id="blockListPanel">
+                <p:panel style="border: none;" id="user_search_panel">
                     <f:facet name="header">
-                        <label>Choose Block &raquo; Queries &raquo; List Block</label>
-                    </f:facet>
+                        <label>Block Management &raquo; Queries &raquo; Block Search</label>
+                    </f:facet> 
+                    <h:panelGrid columns="9">
+                        <h:outputLabel id="lblEntryCode" value="Entry Code" for="entry"/>
+                        <h:selectOneMenu id="entryCodeLbl" value="#{blockListBean.entryCode}">
+                            <f:selectItem itemLabel="Select Entry" itemValue="" />
+                            <f:selectItems value="#{userHelperBean.allEntries}" />
+                        </h:selectOneMenu>
+                        <h:outputText value="&nbsp;" />
+                        <h:commandButton value="Search">
+                            <f:ajax render=":block_list_panel blockTable" listener="#{blockListBean.searchButtonClickedHandler}" execute="@form" />
+                        </h:commandButton>
+                    </h:panelGrid>
+
+                </p:panel>
+                <p:panel style="border: none;" id="block_list_panel">
+                    <f:facet name="header">
+                        <label>Block List</label>
+                    </f:facet> 
+                    <p:dataTable var="block" value="#{blockListBean.blocks}" id="blockTable">
+                        <p:column headerText="Block Name">
+                            <h:outputText value="#{block.blockName}" />
+                        </p:column>
+                        <p:column headerText="Start Date">
+                            <h:outputText value="#{block.startDate}" />
+                        </p:column>
+                        <p:column headerText="End Date">
+                            <h:outputText value="#{block.startDate}" />
+                        </p:column>
+                        <p:column headerText="">
+                            <h:outputLink id="editLink"  value="#{request.contextPath}/faces/blocks/editblock.xhtml">
+                                <f:param name="blockCode" value="#{block.blockName}"/>
+                                Edit
+                            </h:outputLink>
+                        </p:column>
+                    </p:dataTable>
                 </p:panel>
             </h:form>
         </ui:define>

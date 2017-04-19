@@ -1,22 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cs425.mumsched.web.blocks.entity;
 
 import cs425.mumsched.web.entries.entity.Entry;
 import cs425.mumsched.web.sections.entity.Section;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -38,11 +41,28 @@ public class Block implements Serializable {
     @Column(name = "block_name")
     private String blockName;
 
-    private transient List<Section> sections;
+    @OneToMany(cascade = CascadeType.ALL)
+      @JoinTable(
+            name="Block_Section",
+            joinColumns = @JoinColumn( name="block_id"),
+            inverseJoinColumns = @JoinColumn( name="section_id")
+        )
+    private List<Section> sections;
 
     @ManyToOne
     private Entry entry;
-
+    
+    @Column(name = "start_date")
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    
+    @Column(name = "end_date")
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
+    
+    @Column(name = "is_active")
+    private boolean isActive;
+    
     public int getBlockId() {
         return blockId;
     }
@@ -66,5 +86,40 @@ public class Block implements Serializable {
     public void setEntry(Entry entry) {
         this.entry = entry;
     }
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
+    
+    
 
 }

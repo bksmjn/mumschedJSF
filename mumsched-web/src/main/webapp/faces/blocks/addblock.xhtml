@@ -16,7 +16,51 @@
                     <f:facet name="header">
                         <label>Block Management &raquo; Entries &raquo; Add Block</label>
                     </f:facet>
+                    <h:panelGrid columns="3"  style="font-size: small">
+                        <h:outputLabel id="entryCodeLBL" value="Entry Code" for="entryCodeLbl"/>
+                        <h:selectOneMenu id="entryCodeLbl" value="#{blockAddBean.entryCode}">
+                            <f:selectItem itemLabel="Select Entry" itemValue="" />
+                            <f:selectItems value="#{userHelperBean.allEntries}" />
+                        </h:selectOneMenu>
+                        <h:message id="msgTempRole" for="entryCodeLbl"/>
+                        <h:outputLabel id="lblBlockName" value="Block Name" for="blockName"/>
+                        <h:inputText id="blockName" value="#{blockAddBean.block.blockName}"/>
+                        <h:message id="inblockName" for="blockName"/>
+                        <h:outputLabel id="lblBlockNumber" value="Block Number" for="blockNumberLBL"/>
+                        <h:selectOneMenu id="blockNumberLBL" value="#{blockAddBean.blockNumber}">
+                            <f:selectItem itemLabel="Select Block Number" itemValue="" />
+                            <f:selectItem itemLabel="1" itemValue="1" />
+                            <f:selectItem itemLabel="2" itemValue="2" />
+                            <f:selectItem itemLabel="3" itemValue="3" />
+                            <f:selectItem itemLabel="4" itemValue="4" />
+                            <f:selectItem itemLabel="5" itemValue="5" />
+                            <f:selectItem itemLabel="6" itemValue="6" />
+                            <f:selectItem itemLabel="7" itemValue="7" />
+                            <f:selectItem itemLabel="8" itemValue="8" />
+                            <f:selectItem itemLabel="9" itemValue="9" />
+                        </h:selectOneMenu>
+                        <h:message id="msgblockNumber" for="blockNumberLBL"/>
+                        <h:commandButton value="Generate Sections">
+                            <f:ajax listener="#{blockAddBean.generateSections}" execute="@form" render=":blockAdd :section_list_panel :msg_global"/>
+                        </h:commandButton>
+                    </h:panelGrid>
+                    <p:panel style="border: none;" id="section_list_panel">
+                        <f:facet name="header">
+                            <label>Section List</label>
+                        </f:facet> 
+                        <p:dataTable var="section" rowIndexVar="rowIndex" value="#{blockAddBean.sections}" id="sectionsTable">
+                            <p:column headerText="Sno">
+                                <h:outputText value="#{rowIndex+1}" />
+                            </p:column>
+                            <p:column headerText="Status">
+                                <h:outputText value="#{section.status}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
                 </p:panel>
+                <h:commandButton id="saveBtn" style="display: none;" value="Save">
+                    <f:ajax listener="#{blockAddBean.saveButtonClickedHandler}" execute="@form" render=":blockAdd :section_list_panel :msg_global"/>
+                </h:commandButton>
             </h:form>
         </ui:define>
     </ui:composition>

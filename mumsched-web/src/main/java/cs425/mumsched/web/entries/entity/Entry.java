@@ -119,6 +119,11 @@ public class Entry implements Serializable {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
+
+    @Override
+    public String toString() {
+        return entryCode;
+    }
     
     
 
