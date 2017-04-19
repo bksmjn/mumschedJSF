@@ -9,7 +9,6 @@ import cs425.mumsched.web.blocks.control.BlockFinder;
 import cs425.mumsched.web.blocks.entity.Block;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,8 @@ public class BlockListBean implements Serializable {
 
     public void searchButtonClickedHandler() {
         try {
-
+            this.blocks = this.blockFinder.findBlocksByEntryCode(entryCode);
+            System.out.println("BLOCKLIST"+this.blocks.size()+this.entryCode);
         } catch (Exception ex) {
 
         }

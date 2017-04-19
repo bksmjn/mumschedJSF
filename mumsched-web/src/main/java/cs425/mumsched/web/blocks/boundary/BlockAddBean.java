@@ -38,23 +38,22 @@ public class BlockAddBean implements Serializable {
 
     @Autowired
     private EntryFinder entryFinder;
-    
+
     @Autowired
     private Messages message;
 
     @PostConstruct
     private void init() {
         this.block = new Block();
-        this.sections = new ArrayList<>();
 
     }
 
     public String saveButtonClickedHandler() {
         try {
             this.block.setSections(sections);
-            System.out.println("SIZE SECTIONS"+sections.size());
+            System.out.println("SIZE SECTIONS" + sections.size());
             this.blockManager.addBlock(block);
-            this.sections=new ArrayList<>();
+            this.sections = new ArrayList<>();
         } catch (Exception ex) {
             this.message.addError(null, "Block", ex.getMessage());
         }
@@ -62,6 +61,7 @@ public class BlockAddBean implements Serializable {
     }
 
     public void generateSections() {
+        this.sections=new ArrayList<>();
         Entry entry = new Entry();
         int totalFPPSections = 0;
         int totalMPPSections = 0;
@@ -69,6 +69,7 @@ public class BlockAddBean implements Serializable {
         try {
             if (entryCode != null) {
                 entry = this.entryFinder.getEntryByCode(entryCode);
+                this.block.setEntry(entry);
                 if (blockNumber == 1) {
                     totalFPPSections = entry.getNoOfFPP() / 35;
                     totalMPPSections = entry.getNoOfMPP() / 35;
@@ -76,19 +77,25 @@ public class BlockAddBean implements Serializable {
                     totalFPPSections = 0;
                     totalMPPSections = entry.getNoOfFPP() / 35;
                     totalElectiveSections = entry.getNoOfMPP() / 35;
-                } else if(blockNumber==3){
-                    
+                } else if (blockNumber == 3 || blockNumber == 4 || blockNumber == 5 || blockNumber == 6 || blockNumber == 7) {
+                    totalFPPSections = 0;
+                    totalMPPSections = 0;
+                    totalElectiveSections = (entry.getNoOfFPP() + entry.getNoOfMPP()) / 35;
+                } else {
+                    totalFPPSections = 0;
+                    totalMPPSections = 0;
+                    totalElectiveSections = entry.getNoOfUSRes() / 35;
                 }
 
                 for (int i = 0; i < totalFPPSections; i++) {
-                    this.sections.add(new Section(this.block,"UNASSIGNED"));
+                    this.sections.add(new Section(this.block, "UNASSIGNED", "FPP"));
                 }
 
                 for (int i = 0; i < totalMPPSections; i++) {
-                    this.sections.add(new Section(this.block,"UNASSIGNED"));
+                    this.sections.add(new Section(this.block, "UNASSIGNED", "MPP"));
                 }
                 for (int i = 0; i < totalElectiveSections; i++) {
-                    this.sections.add(new Section(this.block,"UNASSIGNED"));
+                    this.sections.add(new Section(this.block, "UNASSIGNED", "ELECTIVE"));
                 }
             }
 
@@ -128,7 +135,5 @@ public class BlockAddBean implements Serializable {
     public void setSections(List<Section> sections) {
         this.sections = sections;
     }
-    
-    
 
 }

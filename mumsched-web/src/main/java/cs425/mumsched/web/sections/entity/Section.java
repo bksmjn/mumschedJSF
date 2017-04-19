@@ -44,6 +44,9 @@ public class Section implements Serializable{
 
     @Column(name = "room_no")
     private String roomNo;
+    
+    @Column(name="section_type")
+    private String sectionType;
 
     @Column(name = "is_active")
     private boolean isActive;
@@ -51,9 +54,10 @@ public class Section implements Serializable{
     @Column(name = "status")
     private String status;
 
-    public Section(Block block, String status) {
+    public Section(Block block, String status, String sectionType) {
         this.block = block;
         this.status=status;
+        this.sectionType=sectionType;
     }
 
     public Long getSectionId() {
@@ -110,6 +114,14 @@ public class Section implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getSectionType() {
+        return sectionType;
+    }
+
+    public void setSectionType(String sectionType) {
+        this.sectionType = sectionType;
     }
 
 }

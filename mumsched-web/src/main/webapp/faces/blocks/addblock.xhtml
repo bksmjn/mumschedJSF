@@ -40,6 +40,15 @@
                             <f:selectItem itemLabel="9" itemValue="9" />
                         </h:selectOneMenu>
                         <h:message id="msgblockNumber" for="blockNumberLBL"/>
+
+                        <h:outputLabel id="lblStartDate" value="Start Date" rendered="true" for="startDate"/>
+                        <p:calendar id="startDate" value="#{blockAddBean.block.startDate}" pattern="yyyy-MM-dd" mask="true" navigator="true"/>                      
+                        <h:message id="instartDate" for="startDate"/>
+
+                        <h:outputLabel id="lblEndDate" value="End Date" rendered="true" for="endDate"/>
+                        <p:calendar id="endDate" value="#{blockAddBean.block.endDate}" pattern="yyyy-MM-dd" mask="true" navigator="true"/>                      
+                        <h:message id="inendDate" for="endDate"/>
+
                         <h:commandButton value="Generate Sections">
                             <f:ajax listener="#{blockAddBean.generateSections}" execute="@form" render=":blockAdd :section_list_panel :msg_global"/>
                         </h:commandButton>
@@ -51,6 +60,9 @@
                         <p:dataTable var="section" rowIndexVar="rowIndex" value="#{blockAddBean.sections}" id="sectionsTable">
                             <p:column headerText="Sno">
                                 <h:outputText value="#{rowIndex+1}" />
+                            </p:column>
+                            <p:column headerText="Section Type">
+                                <h:outputText value="#{section.sectionType}" />
                             </p:column>
                             <p:column headerText="Status">
                                 <h:outputText value="#{section.status}" />

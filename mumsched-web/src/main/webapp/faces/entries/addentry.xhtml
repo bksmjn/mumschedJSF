@@ -38,7 +38,7 @@
                         <h:message id="innoOfUSResidents" for="noOfUSResidents"/>
                     </h:panelGrid>
                 </p:panel>
-                <h:commandButton id="saveBtn" style="display: none;" value="Save">
+                <h:commandButton  id="saveBtn" style="display: none;" value="Save">
                     <f:ajax listener="#{entryAddBean.saveButtonClickedHandler}" execute="@form" render=":entryAdd :msg_global"/>
                 </h:commandButton>
             </h:form>

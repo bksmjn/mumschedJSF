@@ -36,7 +36,7 @@ public class EntryAddBean {
         try {
             this.entryManager.addEntry(entry);
             message.addInfo(null, "Entry", "Entry Added Successfully");
-            this.entry=null;
+            this.entry=new Entry();
         } catch (IllegalArgumentException ex) {
             message.addError(null, "Entry", ex.getMessage());
         } catch (AccessDeniedException e) {
