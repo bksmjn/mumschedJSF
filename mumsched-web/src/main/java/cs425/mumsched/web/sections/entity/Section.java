@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs425.mumsched.web.sections.entity;
 
 import cs425.mumsched.web.blocks.entity.Block;
@@ -18,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -26,11 +23,13 @@ import javax.persistence.OneToOne;
  * @author bikesh
  */
 @Entity
-public class Section implements Serializable{
+public class Section implements Serializable {
+
+    private static final String DOMAIN_PREFIX = "cs425.mumsched.web.sections.entity.Section";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long sectionId;
+    private int sectionId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
@@ -44,8 +43,11 @@ public class Section implements Serializable{
 
     @Column(name = "room_no")
     private String roomNo;
-    
-    @Column(name="section_type")
+
+    @Column(name = "available_seat")
+    private int availableSeats = 30;
+
+    @Column(name = "section_type")
     private String sectionType;
 
     @Column(name = "is_active")
@@ -54,17 +56,21 @@ public class Section implements Serializable{
     @Column(name = "status")
     private String status;
 
-    public Section(Block block, String status, String sectionType) {
-        this.block = block;
-        this.status=status;
-        this.sectionType=sectionType;
+    public Section() {
+
     }
 
-    public Long getSectionId() {
+    public Section(Block block, String status, String sectionType) {
+        this.block = block;
+        this.status = status;
+        this.sectionType = sectionType;
+    }
+
+    public int getSectionId() {
         return sectionId;
     }
 
-    public void setSectionId(Long sectionId) {
+    public void setSectionId(int sectionId) {
         this.sectionId = sectionId;
     }
 
@@ -122,6 +128,14 @@ public class Section implements Serializable{
 
     public void setSectionType(String sectionType) {
         this.sectionType = sectionType;
+    }
+
+    public int getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
     }
 
 }

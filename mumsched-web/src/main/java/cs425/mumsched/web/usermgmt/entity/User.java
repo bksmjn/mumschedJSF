@@ -19,12 +19,13 @@ import javax.validation.constraints.NotNull;
  *
  * @author bikesh
  */
+@Entity
 @Table(name = "users")
 @NamedQueries({
     @NamedQuery(name = User.FIND_ALL, query = "SELECT u from User u where 1=1"),
-    @NamedQuery(name = User.FIND_BY_USERNAME, query = "SELECT u from User u where u.emailAddress=:email")
+    @NamedQuery(name = User.FIND_BY_USERNAME, query = "SELECT u from User u where u.emailAddress=:email"),
+    @NamedQuery(name = User.FIND_BY_ROLE, query = "SELECT u from User u where u.role=:role")
 })
-@Entity
 public class User implements Serializable {
 
     @Id
@@ -44,9 +45,10 @@ public class User implements Serializable {
     private static final String DOMAIN_PREFIX = "cs425.mumsched.web.usermgmt.entity.User";
     public static final String FIND_ALL = DOMAIN_PREFIX + "FIND_ALL";
     public static final String FIND_BY_USERNAME = DOMAIN_PREFIX + "FIND_BY_USERNAME";
+    public static final String FIND_BY_ROLE = DOMAIN_PREFIX + "FIND_BY_ROLE";
 
     public User() {
-        this.courses = new ArrayList<Course>();
+        this.courses = new ArrayList<>();
     }
 
     public int getUserId() {
@@ -88,8 +90,6 @@ public class User implements Serializable {
     public void setCourses(Collection<Course> courses) {
         this.courses = courses;
     }
-
- 
 
     public String getUserName() {
         return userName;

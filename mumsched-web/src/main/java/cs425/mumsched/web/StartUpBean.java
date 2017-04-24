@@ -1,5 +1,7 @@
 package cs425.mumsched.web;
 
+import cs425.mumsched.web.courses.control.CourseManager;
+import cs425.mumsched.web.courses.entity.Course;
 import cs425.mumsched.web.usermgmt.control.UserManager;
 import cs425.mumsched.web.usermgmt.entity.Role;
 import cs425.mumsched.web.usermgmt.entity.User;
@@ -12,14 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author bikesh
  */
-
 @SessionScoped
-public class StartUpBean implements Serializable{
+public class StartUpBean implements Serializable {
 
     @Autowired
     private UserManager usermanager;
     private String userName;
     private String role;
+
+    @Autowired
+    private CourseManager courseManager;
 
     public StartUpBean() {
 
@@ -47,6 +51,23 @@ public class StartUpBean implements Serializable{
         u2.setPassword("12345");
         u2.setRole(Role.PROFESSOR.toString());
         usermanager.addUser(u2);
+
+        //Add Default Course
+        Course fpp = new Course();
+        fpp.setCourseCode("FPP");
+        fpp.setCourseDescription("Compulsory Fundamental Course for further Blocks");
+        fpp.setCourseLevel("400");
+        fpp.setCourseTitle("FPP");
+        fpp.setCourseType("FPP");
+        courseManager.addCourse(fpp);
+
+        Course mpp = new Course();
+        mpp.setCourseCode("MPP");
+        mpp.setCourseDescription("Compulsory Fundamental Course for further Blocks");
+        mpp.setCourseLevel("400");
+        mpp.setCourseTitle("MPP");
+        mpp.setCourseType("MPP");
+        courseManager.addCourse(mpp);
     }
 
     /**

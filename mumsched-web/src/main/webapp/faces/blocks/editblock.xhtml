@@ -14,10 +14,41 @@
             <h:form id="blockAdd" prependId="false">
                 <p:panel style="border: none;" id="blockAddPanel">
                     <f:facet name="header">
-                        <label>Block Management &raquo; Queries &raquo; Edit Block</label>
+                        <label>Block Management &raquo; Queries &raquo; View Block &raquo; Sections</label>
                     </f:facet>
                 </p:panel>
+                <p:dataTable var="section" rowIndexVar="rowIndex" value="#{blockEditBean.sections}" id="sectionsTable">
+                    <p:column headerText="Sno">
+                        <h:outputText value="#{rowIndex+1}" />
+                    </p:column>
+                    <p:column headerText="Section Type">
+                        <h:outputText value="#{section.sectionType}" />
+                    </p:column>
+                    <p:column headerText="Room Number">
+                        <h:outputText value="#{section.roomNo}" />
+                    </p:column>
+                    <p:column headerText="Total Available Seats">
+                        <h:outputText value="#{section.availableSeats}" />
+                    </p:column>
+                    <p:column headerText="Status">
+                        <h:outputText value="#{section.status}" />
+                    </p:column>
+                    <p:column headerText="">
+<!--                        <h:outputLink id="editLink"  value="#{request.contextPath}/faces/sections/schedulesection.xhtml">
+                            <f:param name="sectionId" value="#{section.sectionId}"/>
+                            Schedule
+                        </h:outputLink>-->
+                        <p:commandButton value="Schedule" type="button" onclick="PF('dlg2').show();">
+                            <f:setPropertyActionListener target="#{blockEditBean.sectionId}"
+                                                         value="#{section.sectionId}"  />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+
             </h:form>
+            <p:dialog header="Schedule Section" closable="true" widgetVar="dlg2"  width="500" height="100">
+                <h:outputText value="#{blockEditBean.sectionId}" />
+            </p:dialog>   
         </ui:define>
     </ui:composition>
 </html>

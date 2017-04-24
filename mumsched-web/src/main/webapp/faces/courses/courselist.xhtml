@@ -38,6 +38,10 @@
                         <p:column headerText="Description">
                             <h:outputText value="#{c.courseDescription}" />
                         </p:column>
+
+                        <p:column headerText="Course Type">
+                            <h:outputText value="#{c.courseType}" />
+                        </p:column>
                         <p:column headerText="">
                             <h:outputLink id="editLink"  value="#{request.contextPath}/faces/courses/courseedit.xhtml">
                                 <f:param name="code" value="#{c.courseCode}"/>

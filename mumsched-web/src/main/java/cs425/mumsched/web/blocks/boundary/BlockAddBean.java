@@ -52,8 +52,11 @@ public class BlockAddBean implements Serializable {
         try {
             this.block.setSections(sections);
             System.out.println("SIZE SECTIONS" + sections.size());
+            this.block.setStatus("UNASSIGNED");
             this.blockManager.addBlock(block);
             this.sections = new ArrayList<>();
+            this.block=new Block();
+            this.message.addInfo(null, "Block", "Block Added Successfully");
         } catch (Exception ex) {
             this.message.addError(null, "Block", ex.getMessage());
         }
@@ -71,20 +74,20 @@ public class BlockAddBean implements Serializable {
                 entry = this.entryFinder.getEntryByCode(entryCode);
                 this.block.setEntry(entry);
                 if (blockNumber == 1) {
-                    totalFPPSections = entry.getNoOfFPP() / 35;
-                    totalMPPSections = entry.getNoOfMPP() / 35;
+                    totalFPPSections = entry.getNoOfFPP() / 30;
+                    totalMPPSections = entry.getNoOfMPP() / 30;
                 } else if (blockNumber == 2) {
                     totalFPPSections = 0;
-                    totalMPPSections = entry.getNoOfFPP() / 35;
-                    totalElectiveSections = entry.getNoOfMPP() / 35;
-                } else if (blockNumber == 3 || blockNumber == 4 || blockNumber == 5 || blockNumber == 6 || blockNumber == 7) {
+                    totalMPPSections = entry.getNoOfFPP() / 30;
+                    totalElectiveSections = entry.getNoOfMPP() / 30;
+                } else if (blockNumber == 3 || blockNumber == 4 || blockNumber == 5 || blockNumber == 6 || blockNumber == 7 || blockNumber==8 || blockNumber==9) {
                     totalFPPSections = 0;
                     totalMPPSections = 0;
-                    totalElectiveSections = (entry.getNoOfFPP() + entry.getNoOfMPP()) / 35;
+                    totalElectiveSections = (entry.getNoOfFPP() + entry.getNoOfMPP()) / 30;
                 } else {
                     totalFPPSections = 0;
                     totalMPPSections = 0;
-                    totalElectiveSections = entry.getNoOfUSRes() / 35;
+                    totalElectiveSections = entry.getNoOfUSRes() / 30;
                 }
 
                 for (int i = 0; i < totalFPPSections; i++) {

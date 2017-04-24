@@ -32,9 +32,6 @@
                         <h:outputLabel id="lbllevel" value="Level" for="level"/>
                         <h:inputText id="level" value="#{courseAddBean.course.courseLevel}"/>
                         <h:message id="inlevel" for="level"/>
-
-
-
                     </h:panelGrid>
                     <h:commandButton id="saveBtn" style="display: none;" value="Save">
                         <f:ajax listener="#{courseAddBean.saveButtonClickedHandler}" execute="@form" render=":courseAdd :msg_global"/>

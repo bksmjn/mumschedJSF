@@ -20,7 +20,7 @@
                         <h:outputLabel id="lblEntryCode" value="Entry Code" for="entry"/>
                         <h:selectOneMenu id="entryCodeLbl" value="#{blockListBean.entryCode}">
                             <f:selectItem itemLabel="Select Entry" itemValue="" />
-                            <f:selectItems value="#{userHelperBean.allEntries}" />
+                            <f:selectItems  value="#{userHelperBean.allEntries}" />
                         </h:selectOneMenu>
                         <h:outputText value="&nbsp;" />
                         <h:commandButton value="Search">
@@ -43,10 +43,13 @@
                         <p:column headerText="End Date">
                             <h:outputText value="#{block.endDate}" />
                         </p:column>
+                        <p:column headerText="Status">
+                            <h:outputText value="#{block.status}" />
+                        </p:column>
                         <p:column headerText="">
                             <h:outputLink id="editLink"  value="#{request.contextPath}/faces/blocks/editblock.xhtml">
-                                <f:param name="blockCode" value="#{block.blockName}"/>
-                                Edit
+                                <f:param name="blockId" value="#{block.blockId}"/>
+                                View/Schedule
                             </h:outputLink>
                         </p:column>
                     </p:dataTable>

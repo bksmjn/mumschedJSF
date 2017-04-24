@@ -32,6 +32,16 @@ public class UserFinder {
         return (User) sessionFactory.getCurrentSession().getNamedQuery(User.FIND_BY_USERNAME).setParameter("email", emailAddress).uniqueResult();
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<User> findUsersByRole(String role) {
+        try {
+            List<User> users = this.sessionFactory.getCurrentSession().getNamedQuery(User.FIND_BY_ROLE).setParameter("role", role).list();
+            return users;
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

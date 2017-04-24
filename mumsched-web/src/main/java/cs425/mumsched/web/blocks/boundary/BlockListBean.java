@@ -12,6 +12,9 @@ import java.util.List;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 /**
  *
@@ -30,6 +33,7 @@ public class BlockListBean implements Serializable {
 
     public void searchButtonClickedHandler() {
         try {
+            System.out.println("ENTRYCODE"+entryCode);
             this.blocks = this.blockFinder.findBlocksByEntryCode(entryCode);
             System.out.println("BLOCKLIST"+this.blocks.size()+this.entryCode);
         } catch (Exception ex) {

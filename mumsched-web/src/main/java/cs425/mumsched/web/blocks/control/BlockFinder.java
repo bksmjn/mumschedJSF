@@ -19,7 +19,7 @@ public class BlockFinder {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Block> findBlocksByEntryCode(String entryCode) {
         List<Block> blocks = new ArrayList<>();
         try {
@@ -28,6 +28,19 @@ public class BlockFinder {
             throw new IllegalArgumentException(ex.getMessage());
         }
         return blocks;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public Block findBlockByBlockId(int blockId) {
+        Block block = new Block();
+        try {
+            //block = (Block) this.sessionFactory.getCurrentSession().getNamedQuery(Block.FIND_BY_BLOCKID).setParameter("blockId", blockId).uniqueResult();
+            block = (Block)this.sessionFactory.getCurrentSession().get(Block.class,blockId);
+
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+        return block;
     }
 
 }

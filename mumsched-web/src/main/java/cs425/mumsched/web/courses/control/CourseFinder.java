@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cs425.mumsched.web.courses.control;
 
 import cs425.mumsched.web.courses.entity.Course;
@@ -39,9 +35,19 @@ public class CourseFinder {
     @Transactional(propagation = Propagation.SUPPORTS)
     public Course findByCourseCode(String courseCode) {
         try {
-            Course course=(Course) sessionFactory.getCurrentSession().getNamedQuery(Course.FIND_BY_COURSE_CODE).setParameter("code", courseCode).uniqueResult();
-            System.out.println("Course"+course.getCourseCode());
+            Course course = (Course) sessionFactory.getCurrentSession().getNamedQuery(Course.FIND_BY_COURSE_CODE).setParameter("code", courseCode).uniqueResult();
+            System.out.println("Course" + course.getCourseCode());
             return course;
+        } catch (IllegalArgumentException ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Course> findByCourseType(String courseType) {
+        try {
+            List<Course> courses = sessionFactory.getCurrentSession().getNamedQuery(Course.FIND_BY_COURSE_TYPE).setParameter("courseType", courseType).list();
+            return courses;
         } catch (IllegalArgumentException ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }

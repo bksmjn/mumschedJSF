@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:component="http://java.sun.com/jsf/composite/components/toolbar">
+    <ui:composition template="/WEB-INF/template/template.xhtml">
+        <ui:define name="toolbar">
+            <component:toolbar onSave="saveBtn" savePermissionKey="true" updatePermissionKey="true"/>
+        </ui:define>
+        <ui:define name="content">
+            <h:form id="sectionSchedule" prependId="false">
+                <p:panel style="border: none;" id="sectionSchedulePanel">
+                    <f:facet name="header">
+                        <label>Block Management &raquo; Queries &raquo; List Section &raquo;Schedule Section</label>
+                    </f:facet>
+                    <h:panelGrid columns="3"  style="font-size: small">
+                        <h:outputLabel id="lblSectionType" value="Section Type" for="sectionType"/>
+                        <h:inputText id="sectionType" value="#{sectionScheduler.section.sectionType}"/>
+                        <h:message id="insectionType" for="sectionType"/>
+
+
+                        <h:outputLabel id="lblRoomNumber" value="Room Number" for="roomNo"/>
+                        <h:inputText id="roomNumber" value="#{sectionScheduler.section.roomNo}"/>
+                        <h:message id="inroomNumber" for="roomNumber"/>
+
+                        <h:outputLabel id="lblavailableSeats" value="Available Seats" for="password"/>
+                        <h:inputSecret id="availableSeats" value="#{sectionScheduler.section.availableSeats}"/>
+                        <h:message id="inavailableSeats" for="availableSeats"/>
+
+                        <h:outputLabel id="lblProfessor" value="Assigned Professor" for="professor"/>
+                        <h:selectOneMenu id="professorLbl" value="#{sectionScheduler.userId}">
+                            <f:selectItem itemLabel="Select Professor" itemValue="" />
+                            <f:selectItems   value="#{sectionScheduler.allProfessors}" />
+                        </h:selectOneMenu>
+                        <h:outputText value="&nbsp;" />
+
+                        <h:outputLabel id="lblCourse" value="Assigned Course" for="course"/>
+                        <h:selectOneMenu id="courseLbl" value="#{sectionScheduler.courseCode}">
+                            <f:selectItem itemLabel="Select Course" itemValue="" />
+                            <f:selectItems   value="#{sectionScheduler.allCourses}" />
+                        </h:selectOneMenu>
+                        <h:outputText value="&nbsp;" />
+                    </h:panelGrid>
+                </p:panel>
+                <h:commandButton id="saveBtn" style="display: none;" value="Save">
+                    <f:ajax listener="#{sectionScheduler.saveButtonClickedHandler}" execute="@form" render=":sectionSchedule :sectionSchedulePanel :msg_global"/>
+                </h:commandButton>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
