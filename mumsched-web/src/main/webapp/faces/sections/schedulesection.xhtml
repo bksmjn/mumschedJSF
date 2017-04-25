@@ -27,26 +27,25 @@
                         <h:message id="inroomNumber" for="roomNumber"/>
 
                         <h:outputLabel id="lblavailableSeats" value="Available Seats" for="password"/>
-                        <h:inputSecret id="availableSeats" value="#{sectionScheduler.section.availableSeats}"/>
+                        <h:inputText id="availableSeats" value="#{sectionScheduler.section.availableSeats}"/>
                         <h:message id="inavailableSeats" for="availableSeats"/>
 
                         <h:outputLabel id="lblProfessor" value="Assigned Professor" for="professor"/>
                         <h:selectOneMenu id="professorLbl" value="#{sectionScheduler.userId}">
                             <f:selectItem itemLabel="Select Professor" itemValue="" />
-                            <f:selectItems   value="#{sectionScheduler.allProfessors}" />
+                            <f:selectItems   value="#{userHelperBean.allProfessors}" />
                         </h:selectOneMenu>
                         <h:outputText value="&nbsp;" />
 
                         <h:outputLabel id="lblCourse" value="Assigned Course" for="course"/>
                         <h:selectOneMenu id="courseLbl" value="#{sectionScheduler.courseCode}">
                             <f:selectItem itemLabel="Select Course" itemValue="" />
-                            <f:selectItems   value="#{sectionScheduler.allCourses}" />
+                            <f:selectItems   value="#{userHelperBean.allCourses}" />
                         </h:selectOneMenu>
                         <h:outputText value="&nbsp;" />
                     </h:panelGrid>
                 </p:panel>
-                <h:commandButton id="saveBtn" style="display: none;" value="Save">
-                    <f:ajax listener="#{sectionScheduler.saveButtonClickedHandler}" execute="@form" render=":sectionSchedule :sectionSchedulePanel :msg_global"/>
+                <h:commandButton action="#{sectionScheduler.saveButtonClickedHandler}" id="saveBtn" style="display: none;" value="Save">
                 </h:commandButton>
             </h:form>
         </ui:define>

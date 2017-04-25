@@ -59,6 +59,7 @@ public class StartUpBean implements Serializable {
         fpp.setCourseLevel("400");
         fpp.setCourseTitle("FPP");
         fpp.setCourseType("FPP");
+        fpp.setIsActive(true);
         courseManager.addCourse(fpp);
 
         Course mpp = new Course();
@@ -67,6 +68,7 @@ public class StartUpBean implements Serializable {
         mpp.setCourseLevel("400");
         mpp.setCourseTitle("MPP");
         mpp.setCourseType("MPP");
+        mpp.setIsActive(true);
         courseManager.addCourse(mpp);
     }
 

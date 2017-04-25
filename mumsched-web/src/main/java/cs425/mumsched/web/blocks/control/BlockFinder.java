@@ -24,6 +24,7 @@ public class BlockFinder {
         List<Block> blocks = new ArrayList<>();
         try {
             blocks = this.sessionFactory.getCurrentSession().getNamedQuery(Block.FIND_BY_ENTRYID).setParameter("entryCode", entryCode).list();
+           // this.sessionFactory.getCurrentSession().flush();
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }
@@ -35,7 +36,8 @@ public class BlockFinder {
         Block block = new Block();
         try {
             //block = (Block) this.sessionFactory.getCurrentSession().getNamedQuery(Block.FIND_BY_BLOCKID).setParameter("blockId", blockId).uniqueResult();
-            block = (Block)this.sessionFactory.getCurrentSession().get(Block.class,blockId);
+            block = (Block) this.sessionFactory.getCurrentSession().get(Block.class, blockId);
+          //  this.sessionFactory.getCurrentSession().flush();
 
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex.getMessage());

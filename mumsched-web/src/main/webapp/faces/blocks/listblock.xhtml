@@ -23,8 +23,7 @@
                             <f:selectItems  value="#{userHelperBean.allEntries}" />
                         </h:selectOneMenu>
                         <h:outputText value="&nbsp;" />
-                        <h:commandButton value="Search">
-                            <f:ajax render=":block_list_panel blockTable" listener="#{blockListBean.searchButtonClickedHandler}" execute="@form" />
+                        <h:commandButton value="Search" action="#{blockListBean.searchButtonClickedHandler()}">
                         </h:commandButton>
                     </h:panelGrid>
 
@@ -47,10 +46,12 @@
                             <h:outputText value="#{block.status}" />
                         </p:column>
                         <p:column headerText="">
-                            <h:outputLink id="editLink"  value="#{request.contextPath}/faces/blocks/editblock.xhtml">
-                                <f:param name="blockId" value="#{block.blockId}"/>
-                                View/Schedule
-                            </h:outputLink>
+                            <h:commandButton value="View/Schedule" action="#{blockListBean.redirectBlockEdit(block.blockId)}">
+                            </h:commandButton>
+    <!--                            <h:outputLink id="editLink"  value="#{request.contextPath}/faces/blocks/editblock.xhtml">
+                                    <f:param name="blockId" value="#{block.blockId}"/>
+                                    View/Schedule
+                                </h:outputLink>-->
                         </p:column>
                     </p:dataTable>
                 </p:panel>

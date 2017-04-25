@@ -10,20 +10,13 @@
             <h:form id="user_edit" prependId="false">
                 <p:panel style="border: none;" id="user_search_panel">
                     <f:facet name="header">
-                        <label>User Management &raquo; Queries &raquo; Course List</label>
+                        <label>User Management &raquo; Queries &raquo; User List &raquo; User Edit</label>
                     </f:facet> 
-                    <p:dataTable var="c" value="#{userEditBean.user.c}" id="userTable">
-                        <p:column headerText="Code">
-                            <h:outputText value="#{c.courseCode}" />
-                        </p:column>
-                        <p:column headerText="Title">
-                            <h:outputText value="#{c.courseTitle}" />
-                        </p:column>
-
-                        <p:column headerText="Description">
-                            <h:outputText value="#{c.courseDescription}" />
-                        </p:column>
-                    </p:dataTable>
+                    <h:panelGrid columns="3"  style="font-size: small">
+                        <h:outputLabel id="lblFullName" value="Full Name" for="fullName"/>
+                        <h:inputText id="fullName" value="#{userEditBean.user.userName}"/>
+                        <h:message id="infullName" for="fullName"/>
+                    </h:panelGrid>
                 </p:panel>
             </h:form>
         </ui:define>

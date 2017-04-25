@@ -7,25 +7,21 @@ import cs425.mumsched.web.sections.control.SectionManager;
 import cs425.mumsched.web.sections.entity.Section;
 import cs425.mumsched.web.usermgmt.control.UserFinder;
 import cs425.mumsched.web.usermgmt.entity.User;
-import cs425.mumsched.web.utils.Messages;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Controller;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author bikesh
  */
-@Controller
-@ViewScoped
-@Lazy
+@Component
+@Scope("prototype")
 public class SectionScheduler implements Serializable {
 
     private Section section;
@@ -49,8 +45,8 @@ public class SectionScheduler implements Serializable {
     @Autowired
     private CourseFinder courseFinder;
 
-    @Autowired
-    private Messages message;
+//    @Autowired
+//    private Messages message;
 
     @PostConstruct
     private void init() {
@@ -59,10 +55,11 @@ public class SectionScheduler implements Serializable {
             this.sectionId = this.parameterForEdit(fc);
             System.out.println("Section ID" + this.sectionId);
             this.section = this.sectionFinder.findBySectionId(Integer.parseInt(sectionId));
+            System.out.println("Section="+this.section.getSectionType());
             this.courses = this.courseFinder.findByCourseType(this.section.getSectionType());
             this.users = this.userFinder.findUsersByRole("PROFESSOR");
         } catch (Exception ex) {
-            message.addError(null, "Section", "Internal Server error");
+//            message.addError(null, "Section", "Internal Server error");
         }
 
     }
@@ -72,43 +69,17 @@ public class SectionScheduler implements Serializable {
         return params.get("sectionId");
     }
 
-    public SelectItem[] toArrayOfSelectItemProfessor(List<User> users) {
-        SelectItem[] items = new SelectItem[users.size()];
-        int index = 0;
-        for (User u : users) {
-            items[index] = new SelectItem(u.getUserId(), u.getUserName());
-            index++;
-        }
-        return items;
-    }
-
-    public SelectItem[] getAllProfessors() {
-        return toArrayOfSelectItemProfessor(this.users);
-    }
-
-    public SelectItem[] toArrayOfSelectItemCourse(List<Course> courses) {
-        SelectItem[] items = new SelectItem[courses.size()];
-        int index = 0;
-        for (Course c : courses) {
-            items[index] = new SelectItem(c.getCourseId(), c.getCourseTitle());
-            index++;
-        }
-        return items;
-    }
-
-    public SelectItem[] getAllCourses() {
-        return toArrayOfSelectItemCourse(this.courses);
-    }
 
     public String saveButtonClickedHandler() {
         try {
+            System.out.println("SECTION"+this.section.getSectionId());
             this.sectionManager.updateSection(this.section);
-            message.addInfo(null, "Section", "Section Scheduled Successfully");
-            return "/faces/sections/listsection.xhtml?sectionId="+this.sectionId +"& faces-redirect=true";
+//            message.addInfo(null, "Section", "Section Scheduled Successfully");
+
         } catch (Exception ex) {
-            message.addError(null, "Section", ex.getMessage());
+//            message.addError(null, "Section", ex.getMessage());
         }
-        return null;
+        return "/faces/blocks/listblock.xhtml?faces-redirect=true";
     }
 
     public Section getSection() {

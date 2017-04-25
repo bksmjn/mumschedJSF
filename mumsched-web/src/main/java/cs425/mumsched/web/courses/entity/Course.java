@@ -46,7 +46,7 @@ public class Course implements Serializable {
     @Column(name = "is_active")
     private boolean isActive=true;
 
-    private static final String DOMAIN_PREFIX = "cs544.myblog.web.usermgmt.entity.Course";
+    private static final String DOMAIN_PREFIX = "cs425.myblog.web.usermgmt.entity.Course";
     public static final String FIND_ALL = DOMAIN_PREFIX + "FIND_ALL";
     public static final String FIND_BY_COURSE_CODE = DOMAIN_PREFIX + "FIND_BY_COURSE_CODE";
     public static final String FIND_BY_COURSE_TYPE = DOMAIN_PREFIX + "FIND_BY_COURSE_TYPE";

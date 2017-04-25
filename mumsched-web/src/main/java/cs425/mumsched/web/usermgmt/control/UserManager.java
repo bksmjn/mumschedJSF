@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- *@author bikesh
+ * @author bikesh
  */
 @Repository
 public class UserManager {
@@ -25,6 +25,16 @@ public class UserManager {
     public void addUser(User user) {
         try {
             sessionFactory.getCurrentSession().save(user);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateUser(User user) {
+        try {
+            sessionFactory.getCurrentSession().saveOrUpdate(user);
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }

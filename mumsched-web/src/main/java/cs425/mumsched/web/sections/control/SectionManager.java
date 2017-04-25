@@ -38,7 +38,7 @@ public class SectionManager {
             if (section == null) {
                 return;
             }
-            this.sessionFactory.getCurrentSession().update(section);
+            this.sessionFactory.getCurrentSession().saveOrUpdate(section);
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }

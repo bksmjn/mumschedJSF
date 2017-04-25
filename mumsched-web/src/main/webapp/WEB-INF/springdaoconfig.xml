@@ -32,14 +32,6 @@ http://www.springframework.org/schema/context/spring-context.xsd">
         <property name="username" value="root" />
         <property name="password" value="" />
     </bean>
-<!--    <bean id="dataSource"
-              class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/cs544" />
-        <property name="username" value="root" />
-        <property name="password" value="" />
-    </bean>-->
-
     <!-- hibernate Properties -->
     <bean id="hibernateProperties"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">

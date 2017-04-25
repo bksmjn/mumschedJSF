@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cs425.mumsched.web.courses.boundary;
 
 import cs425.mumsched.web.courses.control.CourseFinder;
@@ -46,7 +42,7 @@ public class CourseEditBean implements Serializable{
             this.course = this.courseFinder.findByCourseCode(this.code);
             System.out.println("Course EDIT"+this.code);
         } catch (Exception ex) {
-
+            message.addError(null, "Course Edit", ex.getMessage());
         }
 
     }
@@ -58,15 +54,14 @@ public class CourseEditBean implements Serializable{
 
     public String saveButtonClickedHandler() {
           try {
-            this.courseManager.addCourse(course);
+            this.courseManager.updateCourse(course);
             message.addInfo(null, "Course", "Course Updated Successfully");
-            this.course = null;
         } catch (IllegalArgumentException ex) {
             message.addError(null, "Course", ex.getMessage());
         } catch (AccessDeniedException e) {
             message.addError(null, "Chapter Edit", e.getMessage());
         }
-        return null;
+        return "/faces/courses/courselist.xhtml?faces-redirect=true";
     }
 
     public Course getCourse() {

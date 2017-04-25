@@ -4,22 +4,23 @@ import cs425.mumsched.web.blocks.control.BlockFinder;
 import cs425.mumsched.web.blocks.entity.Block;
 import cs425.mumsched.web.sections.entity.Section;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Controller;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author bikesh
  */
-@Controller
+@Component
+@Scope("prototype")
 @ViewScoped
-@Lazy
 public class BlockEditBean implements Serializable {
 
     private Block block;
@@ -33,16 +34,28 @@ public class BlockEditBean implements Serializable {
 
     @PostConstruct
     private void init() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        this.blockId = this.parameterForEdit(fc);
-        System.out.println("BLOCKID" + this.blockId);
-        this.block = this.blockFinder.findBlockByBlockId(Integer.parseInt(blockId));
+//        FacesContext fc = FacesContext.getCurrentInstance();
+//        this.blockId = this.parameterForEdit(fc);
+        Integer b = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("blockId");
+        System.out.println("BLOCKID" + b);
+        this.block = this.blockFinder.findBlockByBlockId(b);
         this.sections = this.block.getSections();
     }
 
     private String parameterForEdit(FacesContext fc) {
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         return params.get("blockId");
+    }
+
+    public String redirectSectionEdit(int sectionId) {
+        return "/faces/sections/schedulesection.xhtml?sectionId=" + sectionId + "faces-redirect=true";
+    }
+
+    public String clickTest() {
+        String value = FacesContext.getCurrentInstance().
+                getExternalContext().getRequestParameterMap().get("hidden1");
+        System.out.println("TEst" + value);
+        return null;
     }
 
     public Block getBlock() {

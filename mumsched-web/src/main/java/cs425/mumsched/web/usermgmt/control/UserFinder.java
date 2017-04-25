@@ -22,20 +22,25 @@ public class UserFinder {
         System.out.println("INSIDE USER FINDER");
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<User> findAll() {
-        return sessionFactory.getCurrentSession().getNamedQuery(User.FIND_ALL).list();
+        List<User> users=sessionFactory.getCurrentSession().getNamedQuery(User.FIND_ALL).list();
+        this.sessionFactory.getCurrentSession().flush();
+        return users;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public User findUserByEmailAddress(String emailAddress) {
-        return (User) sessionFactory.getCurrentSession().getNamedQuery(User.FIND_BY_USERNAME).setParameter("email", emailAddress).uniqueResult();
+        User user= (User) sessionFactory.getCurrentSession().getNamedQuery(User.FIND_BY_USERNAME).setParameter("email", emailAddress).uniqueResult();
+        this.sessionFactory.getCurrentSession().flush();
+        return user;
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<User> findUsersByRole(String role) {
         try {
             List<User> users = this.sessionFactory.getCurrentSession().getNamedQuery(User.FIND_BY_ROLE).setParameter("role", role).list();
+            this.sessionFactory.getCurrentSession().flush();
             return users;
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex.getMessage());
