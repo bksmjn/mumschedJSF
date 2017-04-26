@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author bikesh
+ * @author praman
  */
 @Component
 @Scope("prototype")
@@ -47,15 +47,13 @@ public class SectionScheduler implements Serializable {
 
 //    @Autowired
 //    private Messages message;
-
     @PostConstruct
     private void init() {
         try {
-            FacesContext fc = FacesContext.getCurrentInstance();
-            this.sectionId = this.parameterForEdit(fc);
+            Integer sectionId = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sectionId");
             System.out.println("Section ID" + this.sectionId);
-            this.section = this.sectionFinder.findBySectionId(Integer.parseInt(sectionId));
-            System.out.println("Section="+this.section.getSectionType());
+            this.section = this.sectionFinder.findBySectionId(sectionId);
+            System.out.println("Section=" + this.section.getSectionType());
             this.courses = this.courseFinder.findByCourseType(this.section.getSectionType());
             this.users = this.userFinder.findUsersByRole("PROFESSOR");
         } catch (Exception ex) {
@@ -69,10 +67,9 @@ public class SectionScheduler implements Serializable {
         return params.get("sectionId");
     }
 
-
     public String saveButtonClickedHandler() {
         try {
-            System.out.println("SECTION"+this.section.getSectionId());
+            System.out.println("SECTION" + this.section.getSectionId());
             this.sectionManager.updateSection(this.section);
 //            message.addInfo(null, "Section", "Section Scheduled Successfully");
 

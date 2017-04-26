@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author bikesh
+ * @author anita
  */
 @Repository
 public class CourseManager {

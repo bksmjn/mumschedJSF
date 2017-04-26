@@ -7,7 +7,7 @@ package cs425.mumsched.web.entries.boundary;
 
 /**
  *
- * @author bikesh
+ * @author amit
  */
 public class EntryEditBean {
     

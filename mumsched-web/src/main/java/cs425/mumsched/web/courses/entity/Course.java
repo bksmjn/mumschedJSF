@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Bikesh
+ * @author anita
  */
 @Entity
 @Table(name = "courses")

@@ -47,8 +47,9 @@ public class BlockEditBean implements Serializable {
         return params.get("blockId");
     }
 
-    public String redirectSectionEdit(int sectionId) {
-        return "/faces/sections/schedulesection.xhtml?sectionId=" + sectionId + "faces-redirect=true";
+    public String redirectSectionEdit(Integer sectionId) {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sectionId", sectionId);
+        return "/faces/sections/schedulesection.xhtml?faces-redirect=true";
     }
 
     public String clickTest() {

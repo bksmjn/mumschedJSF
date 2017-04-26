@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author bikesh
+ * @author amit
  */
 @Repository
 public class EntryManager {
